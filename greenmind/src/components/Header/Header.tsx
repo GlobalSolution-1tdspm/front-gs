@@ -17,8 +17,6 @@ export default function Header() {
             <Link href="/">GreenMind</Link>
           </h1>
         </div>
-
-        {/* Barra de navegação */}
         <nav className="space-x-6 flex items-center">
           <Link href="/" className="text-lg font-medium text-gray-700 hover:text-green-600 transition duration-300 ease-in-out">
             Home

@@ -26,7 +26,7 @@ export default function Home() {
               Explore ideias criativas e práticas que ajudam a construir um futuro mais sustentável.
             </p>
             <Link
-              href="#sobre-nos"
+              href="/paginas/galeria"
               className="bg-transparent border-2 border-white text-white px-10 py-5 rounded-full text-xl font-semibold hover:bg-white hover:text-green-600 transition-all duration-300 ease-in-out"
             >
               Saiba Mais
@@ -45,7 +45,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             <div className="flex flex-col items-center text-center">
               <div className="bg-green-600 text-white p-6 rounded-full mb-4">
-                <FaLeaf className="text-4xl" /> {/* Ícone de folha */}
+                <FaLeaf className="text-4xl" />
               </div>
               <h3 className="text-xl font-semibold text-gray-800">Práticas Sustentáveis</h3>
               <p className="text-gray-600 mt-2">
@@ -54,7 +54,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="bg-green-600 text-white p-6 rounded-full mb-4">
-                <FaLightbulb className="text-4xl" /> {/* Ícone de lâmpada */}
+                <FaLightbulb className="text-4xl" /> 
               </div>
               <h3 className="text-xl font-semibold text-gray-800">Inovação</h3>
               <p className="text-gray-600 mt-2">
@@ -63,7 +63,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="bg-green-600 text-white p-6 rounded-full mb-4">
-                <FaUsers className="text-4xl" /> {/* Ícone de usuários */}
+                <FaUsers className="text-4xl" /> 
               </div>
               <h3 className="text-xl font-semibold text-gray-800">Comunidade</h3>
               <p className="text-gray-600 mt-2">
