@@ -21,7 +21,7 @@ export default function Header() {
           <Link href="/" className="text-lg font-medium text-gray-700 hover:text-green-600 transition duration-300 ease-in-out">
             Home
           </Link>
-          <Link href="/pagina/galeria" className="text-lg font-medium text-gray-700 hover:text-green-600 transition duration-300 ease-in-out">
+          <Link href="/paginas/galeria" className="text-lg font-medium text-gray-700 hover:text-green-600 transition duration-300 ease-in-out">
             Galeria
           </Link>
         </nav>
