@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import "@/app/globals.css";
+import { FaLeaf, FaLightbulb, FaUsers } from "react-icons/fa"; 
 
 export default function Home() {
   return (
@@ -44,7 +45,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             <div className="flex flex-col items-center text-center">
               <div className="bg-green-600 text-white p-6 rounded-full mb-4">
-                <i className="fas fa-leaf text-4xl"></i>
+                <FaLeaf className="text-4xl" /> {/* Ícone de folha */}
               </div>
               <h3 className="text-xl font-semibold text-gray-800">Práticas Sustentáveis</h3>
               <p className="text-gray-600 mt-2">
@@ -53,7 +54,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="bg-green-600 text-white p-6 rounded-full mb-4">
-                <i className="fas fa-lightbulb text-4xl"></i>
+                <FaLightbulb className="text-4xl" /> {/* Ícone de lâmpada */}
               </div>
               <h3 className="text-xl font-semibold text-gray-800">Inovação</h3>
               <p className="text-gray-600 mt-2">
@@ -62,7 +63,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="bg-green-600 text-white p-6 rounded-full mb-4">
-                <i className="fas fa-users text-4xl"></i>
+                <FaUsers className="text-4xl" /> {/* Ícone de usuários */}
               </div>
               <h3 className="text-xl font-semibold text-gray-800">Comunidade</h3>
               <p className="text-gray-600 mt-2">
