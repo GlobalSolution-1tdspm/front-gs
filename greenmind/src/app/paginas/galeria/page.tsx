@@ -75,7 +75,7 @@ export default function Galeria() {
         )}
       </section>
 
-      <div className="modal fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden" id="modal">
+      <div className="modal fixed inset-0 bg-black bg-opacity-50 justify-center items-center hidden" id="modal">
         <div className="modal-content bg-white rounded-lg p-8">
           <span className="close text-2xl absolute top-4 right-4 cursor-pointer" id="close-modal">&times;</span>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Detalhes do Projeto</h2>
