@@ -13,6 +13,13 @@ Bem-vindo ao projeto GreenMind! Este repositório contém o código para o proje
 - **Cicero Gabriel Oliveira Serafim**  
   RM: 556745
 
+## Figma 
+
+Você pode ter acesso ao nosso design acessando a seguinte conta no site:
+
+- Email: greenmindgs@gmail.com
+- Senha: GreenMind2024
+
 ## Repositório GitHub
 
 Você pode acessar o repositório do projeto no GitHub através do seguinte link:
