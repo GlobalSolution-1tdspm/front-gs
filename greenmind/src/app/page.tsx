@@ -1,11 +1,59 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { FaLeaf, FaLightbulb, FaUsers } from "react-icons/fa"; 
 import { FaLinkedin as Linkedin } from "react-icons/fa";
 import { FaGithub as Github } from "react-icons/fa";
 import { FaInstagram as Instagram } from "react-icons/fa";
+import { useState } from 'react';
+
+
+
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: '',
+  });
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+const handleSubmit = async (event: React.FormEvent) => {
+  event.preventDefault();
+
+  const { name, phone, email, message } = formData;
+
+  try {
+    const response = await fetch("http://localhost:8080/contatos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+        email,
+        message
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Erro ao enviar a mensagem');
+    }
+
+    alert("Mensagem enviada com sucesso!");
+  } catch (error) {
+    console.error("Erro ao enviar a requisição:", error);
+  }
+}; 
   return (
     <>
       <main className="relative flex-grow text-gray-800">
@@ -138,6 +186,62 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="contato" className="bg-[#e5f7e7] bg-opacity-90 py-24">
+      <div className="max-w-7xl mx-auto px-6 text-center">
+        <h2 className="text-4xl font-semibold text-black mb-8">Entre em Contato</h2>
+        <p className="text-lg text-black mb-12">
+          Tem alguma dúvida ou sugestão? Nos envie uma mensagem e entraremos em
+          contato!
+        </p>
+
+        <form
+          onSubmit={handleSubmit} 
+          className="space-y-8 max-w-3xl mx-auto bg-[#41a04c79] p-10 rounded-xl shadow-xl"
+        >
+          <div className="grid grid-cols-1 gap-6">
+            <input
+              type="text"
+              name="name"
+              value={formData.name} 
+              onChange={handleChange}
+              placeholder="Seu Nome"
+              className="w-full px-6 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 transition-all"
+            />
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Telefone"
+              className="w-full px-6 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 transition-all"
+            />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="E-mail"
+              className="w-full px-6 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 transition-all"
+            />
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Mensagem"
+              className="w-full px-6 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 transition-all"
+              rows={6}
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            className="bg-transparent border-2 border-white text-white px-10 py-5 rounded-full text-xl font-semibold hover:bg-white hover:text-green-600 transition-all duration-300 ease-in-out"
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
+    </section>
     </>
+    
   );
 }

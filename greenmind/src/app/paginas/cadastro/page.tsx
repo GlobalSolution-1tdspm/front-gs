@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Categoria, imagensCategoria } from "@/app/types";
+import { Categoria, imagensCategoria } from '@/app/types';
 
 export default function CadastroPage() {
   const [formData, setFormData] = useState({
     nomeProj: '',
     descricao: '',
     detalhes: '',
-    categoriaId: '',
+    categoriaId: '', 
     nomeAutor: '',
     emailAutor: '',
   });
@@ -38,48 +38,45 @@ export default function CadastroPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const categoriaNome = categorias.find((categoria) => categoria.idCat.toString() === formData.categoriaId)?.nomeCat;
-    
-    const imagens = categoriaNome && imagensCategoria[categoriaNome] ? imagensCategoria[categoriaNome] : [];
-    
-    const randomImage = imagens.length > 0 ? imagens[Math.floor(Math.random() * imagens.length)] : '';
   
+    const imagens = formData.categoriaId && imagensCategoria[formData.categoriaId] ? imagensCategoria[formData.categoriaId] : [];
+    const randomImage = imagens.length > 0 ? imagens[Math.floor(Math.random() * imagens.length)] : '';
+
+    
     const projetoData = {
       ...formData,
-      imagemUrl: randomImage,
+      imagemUrl: randomImage, 
     };
 
     try {
-        const response = await fetch('http://localhost:8080/projetos', { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(projetoData), 
+      const response = await fetch('http://localhost:8080/projetos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(projetoData),
+      });
+
+      if (response.ok) {
+        setMessage('Projeto cadastrado com sucesso!');
+        setFormData({
+          nomeProj: '',
+          descricao: '',
+          detalhes: '',
+          categoriaId: '',
+          nomeAutor: '',
+          emailAutor: '',
         });
-
-        if (response.ok) {
-            setMessage('Projeto cadastrado com sucesso!');
-            setFormData({
-                nomeProj: '',
-                descricao: '',
-                detalhes: '',
-                categoriaId: '',
-                nomeAutor: '',
-                emailAutor: '',
-            });
-        } else {
-            setMessage(`Erro ao cadastrar o projeto. Status: ${response.status}`);
-            const errorText = await response.text();
-            console.error('Erro na resposta da API:', errorText);
-        }
+      } else {
+        setMessage(`Erro ao cadastrar o projeto. Status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('Erro na resposta da API:', errorText);
+      }
     } catch (error) {
-        console.error('Erro ao enviar os dados:', error);
-        setMessage('Erro ao conectar com o servidor.');
+      console.error('Erro ao enviar os dados:', error);
+      setMessage('Erro ao conectar com o servidor.');
     }
-};
-
-  
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#41A04C]/[0.1] p-6">
@@ -124,7 +121,7 @@ export default function CadastroPage() {
             >
               <option value="">Selecione uma categoria</option>
               {categorias.map((categoria) => (
-                <option key={categoria.idCat} value={categoria.idCat}>
+                <option key={categoria.idCat} value={categoria.nomeCat}>
                   {categoria.nomeCat}
                 </option>
               ))}
@@ -151,7 +148,8 @@ export default function CadastroPage() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-transparent border-2 border-white text-white px-10 py-5 rounded-full text-xl font-semibold hover:bg-white hover:text-green-600 transition-all duration-300 ease-in-out">
+              className="bg-transparent border-2 border-white text-white px-10 py-5 rounded-full text-xl font-semibold hover:bg-white hover:text-green-600 transition-all duration-300 ease-in-out"
+            >
               Cadastrar
             </button>
           </div>
