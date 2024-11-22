@@ -5,7 +5,6 @@ export default function Header() {
   return (
     <header className="bg-white shadow-lg border-b border-gray-300">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo e Título */}
         <div className="flex items-center space-x-4">
           <Link href="/">
             <Image
@@ -20,14 +19,12 @@ export default function Header() {
             <Link href="/">GreenMind</Link>
           </h1>
         </div>
-
-        {/* Navegação */}
         <nav className="flex space-x-6 items-center">
-          <Link
-            href="/paginas/galeria"
-            className="text-lg font-medium text-gray-600 hover:text-green-600 transition duration-200 ease-in-out"
-          >
+          <Link href="/paginas/galeria" className="text-lg font-medium text-gray-600 hover:text-green-600 transition duration-200 ease-in-out">
             Galeria
+          </Link>
+          <Link href="/paginas/cadastro" className="text-lg font-medium text-gray-600 hover:text-green-600 transition duration-200 ease-in-out"          >
+            Cadastro
           </Link>
         </nav>
       </div>
