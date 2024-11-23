@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-// import Image from "next/image";
 import { Projeto } from "@/app/types";
 
 export default function Galeria() {
   const [categoria, setCategoria] = useState("todos");
   const [projetos, setProjetos] = useState<Projeto[]>([]);
+  const [modalAberto, setModalAberto] = useState(false);
+  const [projetoSelecionado, setProjetoSelecionado] = useState<Projeto | null>(null);
 
   useEffect(() => {
     async function fetchProjetos() {
@@ -13,17 +14,13 @@ export default function Galeria() {
         const url = `http://localhost:8080/projetos${
           categoria === "todos" ? "" : "/categoria/" + categoria
         }`;
-        console.log("URL chamada:", url);
         const response = await fetch(url);
-
-        console.log(`URL: ${url}`);
 
         if (!response.ok) {
           throw new Error(`Erro ${response.status}: ${response.statusText}`);
         }
 
         const data = await response.json();
-        console.log("Dados recebidos:", data);
 
         if (Array.isArray(data)) {
           setProjetos(data);
@@ -41,10 +38,20 @@ export default function Galeria() {
     (projeto) => categoria === "todos" || projeto.categoriaId === categoria
   );
 
+  const abrirModal = (projeto: Projeto) => {
+    setProjetoSelecionado(projeto);
+    setModalAberto(true);
+  };
+
+  const fecharModal = () => {
+    setModalAberto(false);
+    setProjetoSelecionado(null);
+  };
+
   return (
-    <div className="galeria-container py-12 px-6">
+    <div className="galeria-container py-12 px-4 max-w-screen-xl mx-auto">
       <header className="text-center mb-12">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-4">
+        <h1 className="text-4xl font-semibold text-gray-800 mb-4">
           Galeria de Projetos de Sustentabilidade
         </h1>
         <nav className="flex justify-center items-center space-x-6">
@@ -76,42 +83,54 @@ export default function Galeria() {
         </nav>
       </header>
 
-      <section className="flex items-center flex-wrap gap-6">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {projetosFiltrados.length > 0 ? (
           projetosFiltrados.map((projeto) => (
             <div
               key={projeto.idProj}
-              className="cardProjeto card bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 max-w-xs mx-4"
+              className="cardProjeto bg-white shadow-xl rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105"
             >
-              {/* <Image
-                                src={projeto.imagemUrl}
-                                alt={projeto.nomeProj}
-                                width={300}
-                                height={200}
-                                layout="intrinsic"
-                                className="object-cover w-full h-48"
-                            /> */}
-              <div className="card-info p-4 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                    {projeto.nomeProj}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    {projeto.descricao}
-                  </p>
-                </div>
-                <button className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-all duration-300 text-sm">
+              <div className="card-info p-6 flex flex-col h-full">
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                  {projeto.nomeProj}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4 flex-grow">
+                  {projeto.detalhes}
+                </p>
+                <button
+                  onClick={() => abrirModal(projeto)}
+                  className="bg-green-600 text-white px-4 py-2 rounded-full mt-auto hover:bg-green-700 transition-all duration-300 text-sm"
+                >
                   Ver mais
                 </button>
               </div>
             </div>
           ))
         ) : (
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-lg col-span-full">
             Nenhum projeto encontrado para esta categoria.
           </p>
         )}
       </section>
+
+      {modalAberto && projetoSelecionado && (
+        <div className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="modal bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              {projetoSelecionado.nomeProj}
+            </h2>
+            <p className="text-gray-600 mb-4">{projetoSelecionado.descricao}</p>
+            <div className="flex justify-end">
+              <button
+                onClick={fecharModal}
+                className="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition-all duration-300 text-sm"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
