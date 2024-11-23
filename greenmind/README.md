@@ -26,10 +26,6 @@ Você pode acessar o repositório do projeto no GitHub através do seguinte link
 
 - [https://github.com/GlobalSolution-1tdspm/front-gs](https://github.com/GlobalSolution-1tdspm/front-gs)
 
-## Deploy Vercel
-
-- 
-- 
 
 ## Vídeo
 
