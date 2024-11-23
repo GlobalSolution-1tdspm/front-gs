@@ -227,21 +227,20 @@ const handleSubmit = async (event: React.FormEvent) => {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              placeholder="Mensagem"
+              placeholder="Sua Mensagem"
               className="w-full px-6 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 transition-all"
-              rows={6}
-            ></textarea>
+              rows={5}
+            />
           </div>
           <button
             type="submit"
-            className="bg-transparent border-2 border-white text-white px-10 py-5 rounded-full text-xl font-semibold hover:bg-white hover:text-green-600 transition-all duration-300 ease-in-out"
+            className="w-full py-4 bg-green-600 text-white text-xl font-semibold rounded-lg hover:bg-green-700 transition-colors"
           >
-            Enviar
+            Enviar Mensagem
           </button>
         </form>
       </div>
     </section>
     </>
-    
   );
 }
