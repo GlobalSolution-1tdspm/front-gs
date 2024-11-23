@@ -4,10 +4,13 @@ export interface Categoria {
   }
 
  export interface Projeto {
-    id: number;
-    nome: string;
+    idProj: number;
+    nomeProj: string;
+    detalhes: string;
     descricao: string;
-    categoria: string;
+    categoriaId: string;
+    emailAutor: string;
+    nomeAutor: string;
     imagemUrl: string; 
 }
   
