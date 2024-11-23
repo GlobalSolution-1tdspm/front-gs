@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import {Projeto} from "@/app/types";
-
+import { Projeto } from "@/app/types";
 
 export default function Galeria() {
     const [categoria, setCategoria] = useState('todos');
@@ -11,9 +10,22 @@ export default function Galeria() {
     useEffect(() => {
         async function fetchProjetos() {
             try {
-                const response = await fetch(`http://localhost:8080/projetos/categoria/${categoria === 'todos' ? '' : categoria}`);
+                const url = `http://localhost:8080/projetos/categoria/${categoria === 'todos' ? '' : categoria}`;
+                console.log('URL chamada:', url);
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error(`Erro ${response.status}: ${response.statusText}`);
+                }
+
                 const data = await response.json();
-                setProjetos(data);
+                console.log('Dados recebidos:', data);
+
+                if (Array.isArray(data)) {
+                    setProjetos(data);
+                } else {
+                    console.error('Dados retornados não são um array:', data);
+                }
             } catch (error) {
                 console.error('Erro ao buscar projetos:', error);
             }
@@ -32,7 +44,7 @@ export default function Galeria() {
                     <select
                         id="categorias"
                         value={categoria}
-                        onChange={(e) => setCategoria(e.target.value )}
+                        onChange={(e) => setCategoria(e.target.value)}
                         className="p-3 bg-white border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-green-500 focus:outline-none transition duration-200"
                     >
                         <option value="todos">Todos</option>
