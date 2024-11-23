@@ -2,6 +2,14 @@ export interface Categoria {
     idCat: number;
     nomeCat: string;
   }
+
+ export interface Projeto {
+    id: number;
+    nome: string;
+    descricao: string;
+    categoria: string;
+    imagemUrl: string; 
+}
   
 export const imagensCategoria: Record<string, string[]> = {
     "Alimentação Sustentável": [

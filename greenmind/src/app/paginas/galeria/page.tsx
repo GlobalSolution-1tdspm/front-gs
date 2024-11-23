@@ -1,14 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import {Projeto} from "@/app/types";
 
-interface Projeto {
-    id: number;
-    nome: string;
-    descricao: string;
-    categoria: string;
-    imagemUrl: string; 
-}
 
 export default function Galeria() {
     const [categoria, setCategoria] = useState('todos');

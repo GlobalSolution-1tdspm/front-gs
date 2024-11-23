@@ -252,7 +252,7 @@ export default function Home() {
             )}
             <button
               type="submit"
-              className="w-full py-4 bg-green-600 text-white text-xl font-semibold rounded-lg hover:bg-green-700 transition-colors"
+              className="bg-transparent border-2 border-white text-white px-10 py-5 rounded-full text-xl font-semibold hover:bg-white hover:text-green-600 transition-all duration-300 ease-in-out"
             >
               Enviar Mensagem
             </button>
