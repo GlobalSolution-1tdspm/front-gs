@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Categoria, imagensCategoria } from '@/app/types';
+import { Categoria } from '@/app/types';
 import { useRouter } from 'next/navigation';
 
 export default function Cadastro() {
@@ -14,7 +14,6 @@ export default function Cadastro() {
     nomeAutor: '',
     emailAutor: '',
   });
-  
 
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [message, setMessage] = useState('');
@@ -41,45 +40,37 @@ export default function Cadastro() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const imagens = imagensCategoria[formData.categoriaId] || [];
-    const randomImage = imagens.length > 0 ? imagens[Math.floor(Math.random() * imagens.length)] : '';
-
-    const projetoData = {
-        ...formData,
-        imagemUrl: randomImage,
-    };
-
     try {
-        const response = await fetch('http://localhost:8080/projetos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(projetoData),
+      const response = await fetch('http://localhost:8080/projetos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setMessage('Projeto cadastrado com sucesso!');
+        setFormData({
+          nomeProj: '',
+          descricao: '',
+          detalhes: '',
+          categoriaId: '',
+          nomeAutor: '',
+          emailAutor: '',
         });
 
-        if (response.ok) {
-            setMessage('Projeto cadastrado com sucesso!');
-            setFormData({
-                nomeProj: '',
-                descricao: '',
-                detalhes: '',
-                categoriaId: '',
-                nomeAutor: '',
-                emailAutor: '',
-            });
-
-            router.push('/paginas/galeria');
-        } else {
-            setMessage(`Erro ao cadastrar o projeto. Status: ${response.status}`);
-            const errorText = await response.text();
-            console.error('Erro na resposta da API:', errorText);
-        }
+        router.push('/paginas/galeria');
+      } else {
+        setMessage(`Erro ao cadastrar o projeto. Status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('Erro na resposta da API:', errorText);
+      }
     } catch (error) {
-        console.error('Erro ao enviar os dados:', error);
-        setMessage('Erro ao conectar com o servidor.');
+      console.error('Erro ao enviar os dados:', error);
+      setMessage('Erro ao conectar com o servidor.');
     }
-};
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#41A04C]/[0.1] p-6">

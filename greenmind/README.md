@@ -31,4 +31,4 @@ Você pode acessar o repositório do projeto no GitHub através do seguinte link
 
 Você também pode assistir como funciona um pouco o nosso site pelo YouTube!
 
-- 
+- [https://youtu.be/17phI05uL9w](https://youtu.be/17phI05uL9w)
