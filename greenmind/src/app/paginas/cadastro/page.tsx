@@ -41,7 +41,6 @@ export default function Cadastro() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Evitar a redeclaração de variáveis
     const imagens = imagensCategoria[formData.categoriaId] || [];
     const randomImage = imagens.length > 0 ? imagens[Math.floor(Math.random() * imagens.length)] : '';
 
@@ -85,12 +84,12 @@ export default function Cadastro() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#41A04C]/[0.1] p-6">
       <div className="w-full max-w-xl p-10 bg-[#41A04C]/[0.37] rounded-3xl shadow-2xl">
-        <h1 className="text-3xl font-bold text-center text-white mb-6">Cadastro de Projeto</h1>
+        <h1 className="text-3xl font-bold text-center text-white mb-6">Cadastre seu Projeto</h1>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="nomeAutor"
-            placeholder="Nome do Autor"
+            placeholder="Digite seu Nome Completo"
             value={formData.nomeAutor}
             onChange={handleInputChange}
             className="w-full px-4 py-3 mb-4 bg-white border-2 border-gray-200 rounded-full text-lg focus:outline-none focus:border-[#41A04C]"
@@ -99,7 +98,7 @@ export default function Cadastro() {
           <input
             type="email"
             name="emailAutor"
-            placeholder="Email do Autor"
+            placeholder="Digite seu E-mail"
             value={formData.emailAutor}
             onChange={handleInputChange}
             className="w-full px-4 py-3 mb-4 bg-white border-2 border-gray-200 rounded-full text-lg focus:outline-none focus:border-[#41A04C]"
@@ -108,7 +107,7 @@ export default function Cadastro() {
           <input
             type="text"
             name="nomeProj"
-            placeholder="Nome do Projeto"
+            placeholder="Digite o título do Projeto"
             value={formData.nomeProj}
             onChange={handleInputChange}
             className="w-full px-4 py-3 mb-4 bg-white border-2 border-gray-200 rounded-full text-lg focus:outline-none focus:border-[#41A04C]"
@@ -133,7 +132,7 @@ export default function Cadastro() {
           </div>
           <textarea
             name="descricao"
-            placeholder="Descrição do Projeto"
+            placeholder="Faça uma descrição sobre o projeto"
             value={formData.descricao}
             onChange={handleInputChange}
             className="w-full px-4 py-3 mb-4 bg-white border-2 border-gray-200 rounded-lg text-lg focus:outline-none focus:border-[#41A04C]"
@@ -142,7 +141,7 @@ export default function Cadastro() {
           />
           <textarea
             name="detalhes"
-            placeholder="Detalhes do Projeto"
+            placeholder="Descreva seu projeto"
             value={formData.detalhes}
             onChange={handleInputChange}
             className="w-full px-4 py-3 mb-6 bg-white border-2 border-gray-200 rounded-lg text-lg focus:outline-none focus:border-[#41A04C]"
