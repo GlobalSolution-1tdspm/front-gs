@@ -83,19 +83,19 @@ export default function Galeria() {
         </nav>
       </header>
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
         {projetosFiltrados.length > 0 ? (
           projetosFiltrados.map((projeto) => (
             <div
               key={projeto.idProj}
-              className="cardProjeto bg-white shadow-xl rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105"
+              className="cardProjeto bg-white shadow-xl rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 flex flex-col justify-between w-full max-w-xs"
             >
               <div className="card-info p-6 flex flex-col h-full">
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">
                   {projeto.nomeProj}
                 </h3>
-                <p className="text-gray-600 text-sm mb-4 flex-grow">
-                  {projeto.detalhes}
+                <p className="text-gray-600 text-sm mb-4 flex-grow overflow-hidden text-ellipsis line-clamp-6">
+                  {projeto.descricao}
                 </p>
                 <button
                   onClick={() => abrirModal(projeto)}
@@ -119,7 +119,7 @@ export default function Galeria() {
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
               {projetoSelecionado.nomeProj}
             </h2>
-            <p className="text-gray-600 mb-4">{projetoSelecionado.descricao}</p>
+            <p className="text-gray-600 mb-4">{projetoSelecionado.detalhes}</p>
             <div className="flex justify-end">
               <button
                 onClick={fecharModal}

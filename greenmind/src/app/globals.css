@@ -17,21 +17,3 @@ a {
 button:hover {
   @apply transition-colors duration-300 ease-in-out;
 }
-
-.cardProjeto {
-  width: 200px;
-  height: 300px;
-
-  p {
-    display: -webkit-box; 
-    -webkit-box-orient: vertical;
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    line-clamp: 6; 
-    -webkit-line-clamp: 6; 
-  }
-
-  .card-info{
-    height: 100%;
-  }
-}
